@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sweet Search</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #000;
+    }
+    .search-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="">
+  </div>
+
+  <script>
+    const backgroundImages = ['images/background1.jpeg', 'images/background2.jpeg', 'images/background3.jpeg', 'images/background4.jpeg'];
+
+    const placeholderTexts = [
+      "I love you",
+      "You're a cutie :)",
+      "You're amazing!",
+      "Thinking of you 💕",
+      "You're my sunshine ☀️"
+    ];
+
+    // Set random background image
+    const bgImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+    document.body.style.backgroundImage = "url('" + bgImage + "')";
+
+    // Typing animation
+    function typeText(text, element, index = 0) {
+      if (index < text.length) {
+        element.setAttribute("placeholder", text.substring(0, index + 1));
+        setTimeout(() => typeText(text, element, index + 1), 100);
+      }
+    }
+
+    const randomText = placeholderTexts[Math.floor(Math.random() * placeholderTexts.length)];
+    const inputField = document.getElementById("search");
+    typeText(randomText, inputField);
+
+    // Search on Enter
+    inputField.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const query = inputField.value.trim();
+        if (query) {
+          window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
